@@ -1,0 +1,42 @@
+{
+    "name": "pastuhov/yii2-logstock",
+    "description": "The testing extension for the Yii framework",
+    "keywords": ["yii2", "testing", "debug", "debugger"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/pastuhov/yii2-logstock/issues",
+        "source": "https://github.com/pastuhov/yii2-logstock"
+    },
+    "authors": [
+        {
+            "name": "Pastukhov Kirill",
+            "email": "kirill@pastukhov.su",
+            "homepage": "https://github.com/pastuhov/",
+            "role": "Developer"
+
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.4",
+        "yiisoft/yii2-debug": "~2.0.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*",
+        "phpunit/dbunit": "~1.0",
+        "scrutinizer/ocular": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "pastuhov\\logstock\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "pastuhov\\logstock\\tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
