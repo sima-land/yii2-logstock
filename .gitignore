@@ -25,5 +25,5 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-# local tests configuration
-/tests/data/config.local.php
+tests/_output/*
+tests/_support/_generated

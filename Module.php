@@ -8,13 +8,9 @@
 namespace pastuhov\logstock;
 
 use Yii;
-use yii\base\Application;
 use yii\base\BootstrapInterface;
 use yii\debug\LogTarget;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\web\View;
-use yii\web\ForbiddenHttpException;
+
 
 /**
  * The Yii Debug Module provides the debug toolbar and debugger
@@ -24,28 +20,7 @@ use yii\web\ForbiddenHttpException;
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
-    /**
-     * @var array the list of IPs that are allowed to access this module.
-     * Each array element represents a single IP filter which can be either an IP address
-     * or an address with wildcard (e.g. 192.168.0.*) to represent a network segment.
-     * The default value is `['127.0.0.1', '::1']`, which means the module can only be accessed
-     * by localhost.
-     */
-    public $allowedIPs = ['127.0.0.1', '::1'];
-    /**
-     * @var array the list of hosts that are allowed to access this module.
-     * Each array element is a hostname that will be resolved to an IP address that is compared
-     * with the IP address of the user. A use case is to use a dynamic DNS (DDNS) to allow access.
-     * The default value is `[]`.
-     */
-    public $allowedHosts = [];
-    /**
-     * @inheritdoc
-     */
-    public $controllerNamespace = 'yii\debug\controllers';
-    /**
-     * @var LogTarget
-     */
+
     public $logTarget;
 
     /**
@@ -93,7 +68,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $this->logTarget = Yii::$app->getLog()->targets['debug'] = new LogTarget($this);
+        $this->logTarget = Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
 
         $app->getUrlManager()->addRules([
             [
@@ -124,12 +99,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
             return false;
         }
 
-        if ($this->checkAccess()) {
-            $this->resetGlobalSettings();
-            return true;
-        } else {
-            throw new ForbiddenHttpException('You are not allowed to access this page.');
-        }
+        $this->resetGlobalSettings();
+
+        return true;
     }
 
     /**
@@ -138,28 +110,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
     protected function resetGlobalSettings()
     {
         Yii::$app->assetManager->bundles = [];
-    }
-
-    /**
-     * Checks if current user is allowed to access the module
-     * @return boolean if access is granted
-     */
-    protected function checkAccess()
-    {
-        $ip = Yii::$app->getRequest()->getUserIP();
-        foreach ($this->allowedIPs as $filter) {
-            if ($filter === '*' || $filter === $ip || (($pos = strpos($filter, '*')) !== false && !strncmp($ip, $filter, $pos))) {
-                return true;
-            }
-        }
-        foreach ($this->allowedHosts as $hostname) {
-            $filter = gethostbyname($hostname);
-            if ($filter === $ip) {
-                return true;
-            }
-        }
-        Yii::warning('Access to debugger is denied due to IP address restriction. The requesting IP address is ' . $ip, __METHOD__);
-        return false;
     }
 
 }
