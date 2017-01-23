@@ -15,4 +15,4 @@ modules:
         - Db
     config:
         Yii2:
-            configFile: 'tests/app/config/functional.php'
+            configFile: 'tests/app/config/web.php'

@@ -29,6 +29,8 @@ class SiteController extends Controller
     public function actionView()
     {
         \Yii::trace('view');
+        \Yii::$app->db->createCommand('SELECT * FROM page')->execute();
+
         return 'view';
     }
 

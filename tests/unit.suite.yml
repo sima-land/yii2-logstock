@@ -11,4 +11,5 @@ modules:
         - Db
     config:
         Yii2:
-            configFile: 'tests/app/config/unit.php'
+            configFile: 'tests/app/config/console.php'
+            class: '\yii\console\Application'

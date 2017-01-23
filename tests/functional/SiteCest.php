@@ -7,5 +7,12 @@ class SiteCest
     {
         $I->amOnPage(['site/view']);
         $I->canSee('view');
+
+        //\Yii::$app->getModule('logstock')->logTarget->export();
+        $logger = \Yii::$app->getLog()->getLogger();
+        $logger->flush();
+        //$logger->log('123123', Logger::LEVEL_TRACE, '123123');
+        \Yii::trace('123sdfsdf');
+        //$logger = \Yii::$app->getLog()->getLogger();
     }
 }
