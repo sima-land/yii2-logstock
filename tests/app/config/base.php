@@ -18,7 +18,7 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'trace'],
                     'exportInterval' => 1, // <-- and here
                 ],
             ],
@@ -26,7 +26,7 @@ $config = [
     ],
 ];
 
-if (YII_ENV_DEV) {
+if (YII_ENV_TEST) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'logstock';
     $config['modules']['logstock'] = [

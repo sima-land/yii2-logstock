@@ -22,13 +22,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public $logTarget;
 
     /**
-     * @var array|Panel[] list of debug panels. The array keys are the panel IDs, and values are the corresponding
-     * panel class names or configuration arrays. This will be merged with [[corePanels()]].
-     * You may reconfigure a core panel via this property by using the same panel ID.
-     * You may also disable a core panel by setting it to be false in this property.
-     */
-    public $panels = [];
-    /**
      * @var string the directory storing the debugger data files. This can be specified using a path alias.
      */
     public $dataPath = '@runtime/logstock';
@@ -74,13 +67,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public function bootstrap($app)
     {
         $this->logTarget = Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
-
-        // delay attaching event handler to the view component after it is fully configured
-        $app->on(\yii\base\Application::EVENT_BEFORE_REQUEST, function () use ($app) {
-            foreach (Yii::$app->getLog()->targets as $target) {
-                $target->enabled = true;
-            }
-        });
 
         $app->getUrlManager()->addRules([
             [

@@ -1,18 +1,22 @@
 <?php
 
-namespace yiiunit\extensions\debug;
+namespace pastuhov\logstock\tests\unit;
 
 use Yii;
-use yii\debug\LogTarget;
-use yii\debug\Module;
 
-class LogTargetTest extends \Codeception\Test\Unit
+class LogTargetTest extends TestCase
 {
     public function testGetRequestTime()
     {
+        $this->tester->assertLog(function (){
+            Yii::info('Test info message');
+            Yii::$app->getDb()->createCommand('SELECT * FROM page')->execute();
+        });
+    }
 
-        $logTarget = new LogTarget($module);
-        $data = $this->invoke($logTarget, 'collectSummary');
-        self::assertSame($_SERVER['REQUEST_TIME_FLOAT'], $data['time']);
+    protected function _before()
+    {
+        $config = require('tests/app/config/console.php');
+        $this->mockApplication($config);
     }
 }
