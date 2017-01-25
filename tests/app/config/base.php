@@ -30,7 +30,7 @@ if (YII_ENV_TEST) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'logstock';
     $config['modules']['logstock'] = [
-        'class' => '\pastuhov\logstock\Module',
+        'class' => \pastuhov\logstock\Module::class,
     ];
 
 }
