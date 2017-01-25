@@ -44,7 +44,7 @@ class LogTarget extends Target
         FileHelper::createDirectory($path, $this->module->dirMode);
 
         $summary = $this->collectSummary();
-        $dataFile = "$path/{$this->tag}.data";
+        $dataFile = "$path/{$this->tag}.log";
         $data = [];
 
         $data['log'] = $this->save();

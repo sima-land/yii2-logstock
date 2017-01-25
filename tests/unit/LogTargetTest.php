@@ -11,7 +11,7 @@ class LogTargetTest extends TestCase
         $this->tester->assertLog(function (){
             Yii::info('Test info message');
             Yii::$app->getDb()->createCommand('SELECT * FROM page')->execute();
-        });
+        }, Yii::$app);
     }
 
     protected function _before()
