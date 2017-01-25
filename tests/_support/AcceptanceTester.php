@@ -1,5 +1,5 @@
 <?php
-
+namespace pastuhov\logstock\tests;
 
 /**
  * Inherited Methods

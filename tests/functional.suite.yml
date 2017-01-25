@@ -10,7 +10,6 @@ class_name: FunctionalTester
 modules:
     enabled:
         - Asserts
-        - pastuhov\logstock\tests\Helper\Functional
         - Yii2
         - Db
     config:

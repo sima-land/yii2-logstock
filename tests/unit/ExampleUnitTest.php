@@ -4,9 +4,9 @@ namespace pastuhov\logstock\tests\unit;
 
 use Yii;
 
-class LogTargetTest extends TestCase
+class ExampleUnitTest extends TestCase
 {
-    public function testGetRequestTime()
+    public function testExampleUnitUsage()
     {
         $this->tester->assertLog(function (){
             Yii::info('Test info message');

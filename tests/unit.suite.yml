@@ -6,7 +6,6 @@ class_name: UnitTester
 modules:
     enabled:
         - Asserts
-        - pastuhov\logstock\tests\Helper\Unit
         - pastuhov\logstock\UnitHelper
 #        - Yii2
 #        - Db
