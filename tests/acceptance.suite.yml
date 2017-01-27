@@ -2,5 +2,8 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - Asserts
+        - PhpBrowser
         - pastuhov\logstock\AcceptanceHelper
-
+    config:
+        PhpBrowser:
+            url: http://localhost:8080
