@@ -1,0 +1,15 @@
+Pretty URL not enabled. Using default URL parsing logic.
+
+Route requested: 'site/view'
+
+Route to run: site/view
+
+Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionView()
+
+view
+
+SELECT * FROM page
+
+Opening DB connection: sqlite:/home/pastukhov/www/yii2-logstock/tests/_output/sqlite_test.db
+
+

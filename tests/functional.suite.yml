@@ -12,6 +12,7 @@ modules:
         - Asserts
         - Yii2
         - Db
+        - pastuhov\logstock\FunctionalHelper
     config:
         Yii2:
             configFile: 'tests/app/config/web.php'
