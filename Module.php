@@ -71,20 +71,22 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $logTarget = $this->logTarget = \Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
 
         $app->on(Application::EVENT_BEFORE_REQUEST, function () use ($logTarget, $app) {
-            $headers = $app->getRequest()->getHeaders();
-            if ($headers['Logstock'] === 'true') {
-                $logTarget->enabled = true;
-            } elseif (isset($headers['Logstock-Get-Content'])) {
-                $content = $this->getContent(base64_decode($headers['Logstock-Get-Content']));
+            if ($app instanceof \yii\web\Application) {
+                $headers = $app->getRequest()->getHeaders();
+                if ($headers['Logstock'] === 'true') {
+                    $logTarget->enabled = true;
+                } elseif (isset($headers['Logstock-Get-Content'])) {
+                    $content = $this->getContent(base64_decode($headers['Logstock-Get-Content']));
 
-                if ($content === false) {
-                    $content[0] = $content[1] = '';
+                    if ($content === false) {
+                        $content[0] = $content[1] = '';
+                    }
+
+                    echo '<p id="expected">' . base64_encode($content[0]) . '</p>' . PHP_EOL .
+                        '<p id="actual">' . base64_encode($content[1]) . '</p>'
+                    ;
+                    $app->end(0);
                 }
-
-                echo '<p id="expected">' . base64_encode($content[0]) . '</p>' . PHP_EOL .
-                    '<p id="actual">' . base64_encode($content[1]) . '</p>'
-                ;
-                $app->end(0);
             }
         });
 
