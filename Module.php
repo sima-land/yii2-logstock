@@ -9,6 +9,7 @@ namespace pastuhov\logstock;
 
 use Yii;
 use yii\base\BootstrapInterface;
+use yii\base\Application;
 
 /**
  * The Yii Debug Module provides the debug toolbar and debugger
@@ -18,13 +19,12 @@ use yii\base\BootstrapInterface;
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
-
-    public $logTarget;
-
     /**
      * @var string the directory storing the debugger data files. This can be specified using a path alias.
      */
     public $dataPath = '@runtime/logstock';
+
+    public $fixturePath =  __DIR__ . '/tests/_data/logstock';
     /**
      * @var integer the permission to be set for newly created debugger data files.
      * This value will be used by PHP [[chmod()]] function. No umask will be applied.
@@ -52,6 +52,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $enableDebugLogs = false;
 
+    protected $logTarget;
+
     /**
      * @inheritdoc
      */
@@ -66,7 +68,26 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $this->logTarget = Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
+        $logTarget = $this->logTarget = \Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
+
+        $app->on(Application::EVENT_BEFORE_REQUEST, function () use ($logTarget, $app) {
+            $headers = $app->getRequest()->getHeaders();
+            if ($headers['Logstock'] === 'true') {
+                $logTarget->enabled = true;
+            } elseif (isset($headers['Logstock-Get-Content'])) {
+                $content = $this->getContent(base64_decode($headers['Logstock-Get-Content']));
+
+                if ($content === false) {
+                    $content[0] = $content[1] = '';
+                }
+
+                echo '<p id="expected">' . base64_encode($content[0]) . '</p>' . PHP_EOL .
+                    '<p id="actual">' . base64_encode($content[1]) . '</p>'
+                ;
+                $app->end(0);
+            }
+        });
+
 
         $app->getUrlManager()->addRules([
             [
@@ -87,12 +108,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function beforeAction($action)
     {
-        if (!$this->enableDebugLogs) {
-            foreach (Yii::$app->getLog()->targets as $target) {
-                //$target->enabled = false;
-            }
-        }
-
         if (!parent::beforeAction($action)) {
             return false;
         }
@@ -108,6 +123,70 @@ class Module extends \yii\base\Module implements BootstrapInterface
     protected function resetGlobalSettings()
     {
         Yii::$app->assetManager->bundles = [];
+    }
+
+
+    public function getActualContent()
+    {
+        $value = '';
+        $manifest = $this->getManifest($this->dataPath);
+        foreach ($manifest as $tag=>$summary) {
+            $file = $this->dataPath . '/' . $tag . '.log';
+            $value .= file_get_contents($file) . PHP_EOL;
+            unlink($file);
+        }
+        unlink($this->dataPath . '/index.data');
+
+        return $value;
+    }
+
+    protected function getManifest($path, $forceReload = false)
+    {
+        if ($forceReload) {
+            clearstatcache();
+        }
+        $indexFile = $path . '/index.data';
+
+        $content = '';
+        $fp = @fopen($indexFile, 'r');
+        if ($fp !== false) {
+            @flock($fp, LOCK_SH);
+            $content = fread($fp, filesize($indexFile));
+            @flock($fp, LOCK_UN);
+            fclose($fp);
+        }
+
+        if ($content !== '') {
+            $manifest = array_reverse(unserialize($content), true);
+        } else {
+            $manifest = [];
+        }
+
+        return $manifest;
+    }
+
+    public function getLogTarget()
+    {
+        return $this->logTarget;
+    }
+
+    public function getContent($fixtureFileName)
+    {
+        $fixtureFilePath = $this->fixturePath . '/' . $fixtureFileName;
+        $actualContent = $this->getActualContent();
+
+        if (file_exists($fixtureFilePath)) {
+            $value = [
+                file_get_contents($fixtureFilePath),
+                $actualContent
+            ];
+        } else {
+            file_put_contents($fixtureFilePath, $actualContent);
+
+            $value = false;
+        }
+
+        return $value;
     }
 
 }
