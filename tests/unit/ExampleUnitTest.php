@@ -3,6 +3,7 @@
 namespace pastuhov\logstock\tests\unit;
 
 use Yii;
+use yii\codeception\TestCase;
 
 class ExampleUnitTest extends TestCase
 {
