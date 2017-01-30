@@ -76,3 +76,21 @@ First time trace will be recorded
 1) Test example unit usage (unit\ExampleUnitTest::testExampleUnitUsage)
 Fixture has aggregated. Please restart test!
 ```
+
+Testing
+-------
+
+```bash
+/vendor/bin/codecept run unit,acceptance
+```
+
+If web server needed:
+
+```bash
+./tests/bin/yii serve&
+```
+
+Security
+--------
+
+If you discover any security related issues, please email pastukhov_k@sima-land.ru instead of using the issue tracker.
