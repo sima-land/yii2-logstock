@@ -77,6 +77,18 @@ First time trace will be recorded
 Fixture has aggregated. Please restart test!
 ```
 
+Recorded trace log:
+```
+Entry: console
+
+Test info message
+
+SELECT * FROM page
+```
+in subsequent test runs log will be compared
+
+For more info see tests.
+
 Testing
 -------
 

@@ -24,7 +24,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $dataPath = '@runtime/logstock';
 
-    public $fixturePath =  __DIR__ . '/tests/_data/logstock';
+    public $fixturePath =  '@app/tests/data/logstock';
     /**
      * @var integer the permission to be set for newly created debugger data files.
      * This value will be used by PHP [[chmod()]] function. No umask will be applied.
@@ -61,6 +61,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         parent::init();
         $this->dataPath = Yii::getAlias($this->dataPath);
+        $this->fixturePath = Yii::getAlias($this->fixturePath);
     }
 
     /**
