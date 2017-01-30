@@ -19,3 +19,9 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction
   - composer show -i
+
+before_script:
+  - ./tests/bin/yii serve&
+
+script:
+  - ./vendor/bin/codecept run acceptance
