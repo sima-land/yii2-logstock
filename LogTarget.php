@@ -158,27 +158,9 @@ class LogTarget extends Target
 
         $summary = [
             'tag' => $this->tag,
-            'sqlCount' => $this->getSqlTotalCount(),
         ];
 
         return $summary;
-    }
-
-    /**
-     * Returns total sql count executed in current request. If database panel is not configured
-     * returns 0.
-     * @return int
-     */
-    protected function getSqlTotalCount()
-    {
-        if (!isset($this->module->panels['db'])) {
-            return 0;
-        }
-        $profileLogs = $this->module->panels['db']->getProfileLogs();
-
-        # / 2 because messages are in couple (begin/end)
-
-        return count($profileLogs) / 2;
     }
 
     protected function convertArrayToText($array)
