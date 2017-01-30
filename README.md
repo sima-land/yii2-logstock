@@ -26,7 +26,9 @@ php composer.phar require --prefer-dist pastuhov/yii2-logstock
 or add
 
 ```
-"pastuhov/yii2-logstock": "~1.0.0"
+"require-dev": {
+    "pastuhov/yii2-logstock": "~1.0.0"
+    ...
 ```
 
 to the require section of your `composer.json` file.
