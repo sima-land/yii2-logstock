@@ -4,6 +4,7 @@ modules:
         - Asserts
         - PhpBrowser
         - pastuhov\logstock\AcceptanceHelper
+        - Db
     config:
         PhpBrowser:
             url: http://localhost:8080

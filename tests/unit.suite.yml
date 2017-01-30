@@ -7,8 +7,8 @@ modules:
     enabled:
         - Asserts
         - pastuhov\logstock\UnitHelper
+        - Db
 #        - Yii2
-#        - Db
 #    config:
 #        Yii2:
 #            configFile: 'tests/app/config/console.php'
