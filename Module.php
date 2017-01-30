@@ -134,7 +134,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $manifest = $this->getManifest($this->dataPath);
         foreach ($manifest as $tag=>$summary) {
             $file = $this->dataPath . '/' . $tag . '.log';
-            $value .= file_get_contents($file) . PHP_EOL;
+            $value .= file_get_contents($file);
             unlink($file);
         }
         unlink($this->dataPath . '/index.data');

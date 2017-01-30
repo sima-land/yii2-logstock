@@ -65,7 +65,15 @@ class LogTarget extends Target
      */
     public function save()
     {
-        $messages = $this->filterMessages($this->messages, Logger::LEVEL_ERROR | Logger::LEVEL_INFO | Logger::LEVEL_WARNING | Logger::LEVEL_TRACE);
+        $messages = $this->filterMessages(
+            $this->messages,
+            Logger::LEVEL_ERROR | Logger::LEVEL_INFO | Logger::LEVEL_WARNING | Logger::LEVEL_TRACE,
+            [],
+            [
+                'yii\db\Connection::open',
+                'yii\db\Connection::close',
+            ]
+        );
         foreach ($messages as &$message) {
             // exceptions may not be serializable if in the call stack somewhere is a Closure
             if ($message[0] instanceof \Throwable || $message[0] instanceof \Exception) {
@@ -156,8 +164,17 @@ class LogTarget extends Target
             return '';
         }
 
+        $request = Yii::$app->getRequest();
+        $entry = '';
+        try {
+            $entry = $request->getAbsoluteUrl();
+        } catch (\Exception $e) {
+            $entry = 'console';
+        }
+
         $summary = [
             'tag' => $this->tag,
+            'entry' => $entry,
         ];
 
         return $summary;
@@ -165,10 +182,10 @@ class LogTarget extends Target
 
     protected function convertArrayToText($array)
     {
-        $text = '';
+        $text = 'Entry: ' . $array['summary']['entry'] . PHP_EOL . PHP_EOL;
 
         foreach ($array['log']['messages'] as $key=>$message) {
-            $text .= $message[0] . PHP_EOL . PHP_EOL;
+            $text .= trim($message[0]) . PHP_EOL . PHP_EOL;
         }
 
         return $text;
