@@ -1,6 +1,6 @@
 Entry: console
 
-Test info message
+Test session
 
 SELECT * FROM session WHERE expired_at < :DYNAMIC AND session_id = :DYNAMIC
 
