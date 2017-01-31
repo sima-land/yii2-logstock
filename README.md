@@ -3,6 +3,8 @@ Testing Extension for Yii 2
 
 This extension provides recording and asserting application trace. Based on yii\debug module.
 
+![Cover](doc/images/terminal.png)
+
 Support
 -------
 1. Unit
