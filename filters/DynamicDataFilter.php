@@ -8,7 +8,12 @@ class DynamicDataFilter implements LogFilterInterface
     /**
      * @var string[]
      */
-    public $dynamicFields = [];
+    public $dynamicFields = [
+        'expired_at',
+        'created_at',
+        'updated_at',
+        'session_id'
+    ];
 
     public function filter($log)
     {
