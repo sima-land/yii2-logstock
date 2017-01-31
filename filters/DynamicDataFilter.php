@@ -1,5 +1,7 @@
 <?php
-namespace pastuhov\logstock;
+namespace pastuhov\logstock\filters;
+
+use pastuhov\logstock\LogFilterInterface;
 
 class DynamicDataFilter implements LogFilterInterface
 {

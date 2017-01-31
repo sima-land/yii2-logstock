@@ -2,7 +2,7 @@
 
 namespace pastuhov\logstock\tests\unit;
 
-use pastuhov\logstock\DynamicDataFilter;
+use pastuhov\logstock\filters\DynamicDataFilter;
 use Yii;
 use yii\codeception\TestCase;
 use yii\console\Application;
