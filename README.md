@@ -11,6 +11,7 @@ Support
 2. Functional (without web server) - does not support
 3. Acceptance (throughout web server)
 
+[![Latest Stable Version](https://poser.pugx.org/pastuhov/yii2-logstock/v/stable)](https://packagist.org/packages/pastuhov/yii2-logstock)
 [![Build Status](https://travis-ci.org/pastuhov/yii2-logstock.svg)](https://travis-ci.org/pastuhov/yii2-logstock)
 [![Total Downloads](https://poser.pugx.org/pastuhov/yii2-logstock/downloads)](https://packagist.org/packages/pastuhov/yii2-logstock)
 
