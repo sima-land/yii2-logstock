@@ -7,7 +7,7 @@ use Yii;
 use yii\codeception\TestCase;
 use yii\console\Application;
 
-class ExampleTestWithFilter extends TestCase
+class ExampleFilterTest extends TestCase
 {
     public function testExampleFilterUsage()
     {
