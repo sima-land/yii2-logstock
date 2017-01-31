@@ -76,7 +76,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 $headers = $app->getRequest()->getHeaders();
                 if ($headers->get('Logstock') === 'true') {
                     $logTarget->enabled = true;
-                } elseif (isset($headers->get('Logstock-Get-Content'))) {
+                } elseif ($headers->get('Logstock-Get-Content') !== null) {
                     $content = $this->getContent(base64_decode($headers->get('Logstock-Get-Content')));
 
                     if ($content === false) {
