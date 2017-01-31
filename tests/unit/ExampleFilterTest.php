@@ -13,7 +13,7 @@ class ExampleFilterTest extends TestCase
     {
         $filter = new DynamicDataFilter();
         $filter->dynamicFields = ['expired_at', 'session_id'];
-        \Yii::$app->getModule('logstock')->addFilter();
+        \Yii::$app->getModule('logstock')->addFilter($filter);
 
         $this->tester->assertLog(function (){
             Yii::info('Test session');
