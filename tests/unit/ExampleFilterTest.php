@@ -2,7 +2,7 @@
 
 namespace pastuhov\logstock\tests\unit;
 
-use pastuhov\logstock\tests\ExampleFilter;
+use pastuhov\logstock\DynamicDataFilter;
 use Yii;
 use yii\codeception\TestCase;
 use yii\console\Application;
@@ -11,7 +11,9 @@ class ExampleFilterTest extends TestCase
 {
     public function testExampleFilterUsage()
     {
-        \Yii::$app->getModule('logstock')->addFilter(new ExampleFilter());
+        $filter = new DynamicDataFilter();
+        $filter->dynamicFields = ['expired_at', 'session_id'];
+        \Yii::$app->getModule('logstock')->addFilter();
 
         $this->tester->assertLog(function (){
             Yii::info('Test session');
