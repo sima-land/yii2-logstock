@@ -52,6 +52,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $enableDebugLogs = false;
 
+    /**
+     * @var LogFilterInterface[] filters for content which stored in fixture
+     */
+    protected $filters = [];
+
     protected $logTarget;
 
     /**
@@ -176,8 +181,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public function getContent($fixtureFileName)
     {
         $fixtureFilePath = $this->fixturePath . '/' . $fixtureFileName;
-        $actualContent = $this->getActualContent();
-
+        $actualContent = $this->acceptFilters($this->getActualContent());
         if (file_exists($fixtureFilePath)) {
             $value = [
                 file_get_contents($fixtureFilePath),
@@ -192,4 +196,27 @@ class Module extends \yii\base\Module implements BootstrapInterface
         return $value;
     }
 
+    public function addFilter(LogFilterInterface $filter)
+    {
+        $this->filters[] = $filter;
+    }
+
+    public function clearFilters()
+    {
+        $this->filters = [];
+    }
+
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    public function acceptFilters(string $log)
+    {
+        foreach ($this->filters as $filter) {
+            $log = $filter->filter($log);
+        }
+
+        return $log;
+    }
 }
