@@ -2,5 +2,5 @@ Entry: console
 
 Test info message
 
-UPDATE * FROM page
+SELECT * FROM session WHERE expired_at < :DYNAMIC AND session_id = :DYNAMIC
 

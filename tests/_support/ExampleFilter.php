@@ -8,6 +8,10 @@ class ExampleFilter implements LogFilterInterface
 {
     public function filter($log)
     {
-        return str_replace('SELECT', 'UPDATE', $log);
+        return preg_replace(
+            "/(session_id|expired_at|updated_at) = '[^']+'/",
+            '$1 = :DYNAMIC',
+            $log
+        );
     }
 }

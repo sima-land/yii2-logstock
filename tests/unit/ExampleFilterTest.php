@@ -14,8 +14,8 @@ class ExampleFilterTest extends TestCase
         \Yii::$app->getModule('logstock')->addFilter(new ExampleFilter());
 
         $this->tester->assertLog(function (){
-            Yii::info('Test info message');
-            Yii::$app->getDb()->createCommand('SELECT * FROM page')->execute();
+            Yii::info('Test session');
+            Yii::$app->getDb()->createCommand("SELECT * FROM session WHERE expired_at < '2015-12-16' AND session_id = '389dh88ha8a873gh'")->execute();
         }, Yii::$app);
     }
 
