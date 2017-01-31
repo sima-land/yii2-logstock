@@ -74,10 +74,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $app->on(Application::EVENT_BEFORE_REQUEST, function () use ($logTarget, $app) {
             if ($app instanceof \yii\web\Application) {
                 $headers = $app->getRequest()->getHeaders();
-                if ($headers['Logstock'] === 'true') {
+                if ($headers->get('Logstock') === 'true') {
                     $logTarget->enabled = true;
-                } elseif (isset($headers['Logstock-Get-Content'])) {
-                    $content = $this->getContent(base64_decode($headers['Logstock-Get-Content']));
+                } elseif (isset($headers->get('Logstock-Get-Content'))) {
+                    $content = $this->getContent(base64_decode($headers->get('Logstock-Get-Content')));
 
                     if ($content === false) {
                         $content[0] = $content[1] = '';
