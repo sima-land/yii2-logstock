@@ -15,7 +15,15 @@ class ExampleFilterTest extends TestCase
 
         $this->tester->assertLog(function (){
             Yii::info('Test session');
-            Yii::$app->getDb()->createCommand("SELECT * FROM session WHERE expired_at < '2015-12-16' AND session_id = '389dh88ha8a873gh'")->execute();
+            Yii::$app
+                ->getDb()
+                ->createCommand(
+                    "SELECT * FROM session WHERE expired_at < :EXPIRED AND session_id = :ID",
+                    [
+                        ':EXPIRED' => date('c'),
+                        ':ID' => uniqid(),
+                    ]
+                )->execute();
         }, Yii::$app);
     }
 
