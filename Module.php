@@ -211,7 +211,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
         return $this->filters;
     }
 
-    public function acceptFilters(string $log)
+    public function acceptFilters($log)
     {
         foreach ($this->filters as $filter) {
             $log = $filter->filter($log);

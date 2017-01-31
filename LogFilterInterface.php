@@ -3,5 +3,5 @@ namespace pastuhov\logstock;
 
 interface LogFilterInterface
 {
-    public function filter(string $log);
+    public function filter(string $log) : string;
 }
