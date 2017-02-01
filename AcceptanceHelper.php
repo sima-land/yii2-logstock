@@ -8,11 +8,14 @@ class AcceptanceHelper extends BaseHelper
      * @param callable $function
      * @param \Codeception\Actor $actor
      * @param string $identifier
+     * @param array $filters
      */
-    public function assertLog($function, $actor, $identifier='')
+    public function assertLog($function, $actor, $identifier='', $filters = [])
     {
         $actor->setHeader('Logstock', 'true');
-
+        if ($filters) {
+            $actor->setHeader('Logstock-filters', serialize($filters));
+        }
         call_user_func($function);
 
         $actor->deleteHeader('Logstock');

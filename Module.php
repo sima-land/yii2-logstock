@@ -79,6 +79,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $app->on(Application::EVENT_BEFORE_REQUEST, function () use ($logTarget, $app) {
             if ($app instanceof \yii\web\Application) {
                 $headers = $app->getRequest()->getHeaders();
+                if ($filters = $headers->get('Logstock-filters')) {
+                    $this->filters = unserialize($headers->get('Logstock-filters'));
+                }
                 if ($headers->get('Logstock') === 'true') {
                     $logTarget->enabled = true;
                 } elseif ($headers->get('Logstock-Get-Content') !== null) {
