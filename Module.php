@@ -74,7 +74,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        //Request schema to avoid unnecessary queries in log
         \Yii::$app->db->schema->getTableSchemas();
+
         $logTarget = $this->logTarget = \Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
 
         $app->on(Application::EVENT_BEFORE_REQUEST, function () use ($logTarget, $app) {

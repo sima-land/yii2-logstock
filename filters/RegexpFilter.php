@@ -4,7 +4,7 @@ namespace pastuhov\logstock\filters;
 use pastuhov\logstock\LogFilterInterface;
 
 /**
- * Class for logs by regular expressions
+ * Class for filtering logs by regular expressions
  *
  * @package pastuhov\logstock\filters
  */

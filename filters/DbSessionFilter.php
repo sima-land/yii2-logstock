@@ -6,7 +6,7 @@ namespace pastuhov\logstock\filters;
  *
  * @package pastuhov\logstock\filters
  */
-class YiiSessionFilter extends RegexpFilter
+class DbSessionFilter extends RegexpFilter
 {
     /**
      * @var array
