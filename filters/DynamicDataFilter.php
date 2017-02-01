@@ -12,14 +12,16 @@ class DynamicDataFilter implements LogFilterInterface
         'expired_at',
         'created_at',
         'updated_at',
-        'session_id'
+        'session_id',
+        'started_at',
+        'expire',
     ];
 
     public function filter($log)
     {
         $fields = implode('|', $this->dynamicFields);
         $log = preg_replace(
-            "/($fields) ([^\\s]+) ([^\\s]+|'[^']+')/",
+            "/(\"?$fields\"?) ([^\\s]+) ([^\\s\\)\\(]+|'[^']+')/",
             '$1 $2 :DYNAMIC',
             $log
         );

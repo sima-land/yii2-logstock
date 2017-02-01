@@ -20,8 +20,7 @@ INSERT INTO "page" VALUES
 DROP TABLE IF EXISTS "session";
 
 CREATE TABLE "session" (
-  id INTEGER PRIMARY KEY NOT NULL,
-  session_id VARCHAR(40),
-  expired_at TIMESTAMP WITH TIME ZONE
-
+  id CHAR(40) NOT NULL PRIMARY KEY,
+  expire INTEGER,
+  data LONGBLOB
 );

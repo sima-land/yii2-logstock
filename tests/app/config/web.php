@@ -9,6 +9,10 @@ return yii\helpers\ArrayHelper::merge(
                 'cookieValidationKey' => 'test',
                 'enableCsrfValidation' => false,
             ],
+            'session' => [
+                'class' => 'yii\web\DbSession',
+                'sessionTable' => 'session',
+            ],
         ],
     ]
 );

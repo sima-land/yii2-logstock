@@ -34,4 +34,13 @@ class SiteController extends Controller
         return 'view';
     }
 
+    /**
+     * @return string
+     */
+    public function actionSession()
+    {
+        \Yii::$app->session->open();
+
+        return 'session';
+    }
 }
