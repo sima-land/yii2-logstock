@@ -21,9 +21,9 @@ class YiiSessionFilter extends RegexpFilter
      * @var array
      */
     public $replacement = [
-        'FROM [`"]:TABLE:["`] WHERE "expire">:DYNAMIC "id"=:DYNAMIC',
-        'FROM [`"]:TABLE:["`] WHERE "id"=:DYNAMIC',
-        'INTO [`"]:TABLE:["`].*VALUES (:DYNAMIC)',
+        'FROM :TABLE: WHERE "expire">:DYNAMIC "id"=:DYNAMIC',
+        'FROM :TABLE: WHERE "id"=:DYNAMIC',
+        'INTO :TABLE:.*VALUES (:DYNAMIC)',
     ];
 
     /**
