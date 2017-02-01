@@ -39,12 +39,8 @@ class SiteController extends Controller
      */
     public function actionSession()
     {
-        \Yii::trace('view');
-        $query = 'SELECT * FROM "session" WHERE "expire">:EXPIRE AND "id"=:ID';
-        \Yii::$app->db->createCommand($query, [
-            ':EXPIRE' => time(),
-            ':ID' => uniqid(),
-        ])->execute();
+        \Yii::trace('session');
+        \Yii::$app->session->open();
 
         return 'session';
     }

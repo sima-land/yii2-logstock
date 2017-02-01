@@ -14,6 +14,7 @@ class DynamicDataFilter implements LogFilterInterface
         'updated_at',
         'session_id',
         'started_at',
+        'expire',
     ];
 
     public function filter($log)

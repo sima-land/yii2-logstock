@@ -2,5 +2,5 @@ Entry: console
 
 Test session
 
-SELECT * FROM session WHERE expired_at < :DYNAMIC AND session_id = :DYNAMIC
+SELECT * FROM session WHERE expire < :DYNAMIC
 

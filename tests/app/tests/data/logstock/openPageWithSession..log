@@ -8,7 +8,17 @@ Route to run: site/session
 
 Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionSession()
 
-view
+session
 
-SELECT * FROM "session" WHERE "expire">:DYNAMIC "id"=:DYNAMIC
+SELECT `data` FROM [`"]session["`] WHERE "expire">:DYNAMIC "id"=:DYNAMIC
+
+Session started
+
+SELECT `id` FROM [`"]session["`] WHERE "id"=:DYNAMIC
+
+PRAGMA table_info(`session`)
+
+PRAGMA foreign_key_list(`session`)
+
+INSERT INTO [`"]session["`].*VALUES (:DYNAMIC)
 

@@ -1,37 +1,35 @@
 <?php
 namespace pastuhov\logstock\filters;
 
-use pastuhov\logstock\LogFilterInterface;
-
 /**
  * Class for filtering yii's session queries
  *
  * @package pastuhov\logstock\filters
  */
-class YiiSessionFilter implements LogFilterInterface
+class YiiSessionFilter extends RegexpFilter
 {
     /**
-     * @var string
+     * @var array
      */
-    public $sessionTableName = 'session';
+    public $patterns = [
+        '/FROM [`"]:TABLE:["`] WHERE ["`]expire["`]>\d+ AND ["`]id["`]=\'\w+\'/',
+        '/FROM [`"]:TABLE:["`] WHERE ["`]id["`]=\'\w+\'/',
+        '/INTO [`"]:TABLE:["`].*VALUES \([^)]+\)/',
+    ];
 
     /**
-     * @param string $log
-     * @return string
+     * @var array
      */
-    public function filter($log)
-    {
-        $patterns = [
-            sprintf('/FROM "%s" WHERE "expire">\d+ AND "id"=\'\w+\'/', $this->sessionTableName),
-            sprintf('/FROM "%s" WHERE "id"=\'\w+\'/', $this->sessionTableName),
-            sprintf('/INTO "%s".*VALUES \([^)]+\)/', $this->sessionTableName),
-        ];
-        $replacement = [
-            sprintf('FROM "%s" WHERE "expire">:DYNAMIC "id"=:DYNAMIC', $this->sessionTableName),
-            sprintf('FROM "%s" WHERE "id"=:DYNAMIC', $this->sessionTableName),
-            sprintf('INTO "%s".*VALUES (:DYNAMIC)', $this->sessionTableName)
-        ];
+    public $replacement = [
+        'FROM [`"]:TABLE:["`] WHERE "expire">:DYNAMIC "id"=:DYNAMIC',
+        'FROM [`"]:TABLE:["`] WHERE "id"=:DYNAMIC',
+        'INTO [`"]:TABLE:["`].*VALUES (:DYNAMIC)',
+    ];
 
-        return preg_replace($patterns, $replacement, $log);
-    }
+    /**
+     * @var array
+     */
+    public $placeholders = [
+        ':TABLE:' => 'session'
+    ];
 }
