@@ -21,7 +21,7 @@ class DynamicDataFilter implements LogFilterInterface
     {
         $fields = implode('|', $this->dynamicFields);
         $log = preg_replace(
-            "/(\"?$fields\"?) ([^\\s]+) ([^\\s\\)\\(]+|'[^']+')/",
+            "/\"?($fields)\"? ?([^\\s'\\)\\(]+) ?([^\\s\\)\\(]+|'[^']+')/",
             '$1 $2 :DYNAMIC',
             $log
         );
