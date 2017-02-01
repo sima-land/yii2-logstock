@@ -14,5 +14,5 @@ Session started
 
 SELECT `id` FROM session WHERE "id"=:DYNAMIC
 
-INSERT INTO session.*VALUES (:DYNAMIC)
+INSERT INTO session  (`data`, `id`, `expire`) VALUES (:DYNAMIC)
 

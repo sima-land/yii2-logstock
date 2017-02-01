@@ -14,7 +14,7 @@ class DbSessionFilter extends RegexpFilter
     public $patterns = [
         '/FROM [`"]:TABLE:["`] WHERE ["`]expire["`]>\d+ AND ["`]id["`]=\'\w+\'/',
         '/FROM [`"]:TABLE:["`] WHERE ["`]id["`]=\'\w+\'/',
-        '/INTO [`"]:TABLE:["`].*VALUES \([^)]+\)/',
+        '/INTO [`"]:TABLE:["`](.*)VALUES \([^)]+\)/',
     ];
 
     /**
@@ -23,7 +23,7 @@ class DbSessionFilter extends RegexpFilter
     public $replacement = [
         'FROM :TABLE: WHERE "expire">:DYNAMIC "id"=:DYNAMIC',
         'FROM :TABLE: WHERE "id"=:DYNAMIC',
-        'INTO :TABLE:.*VALUES (:DYNAMIC)',
+        'INTO :TABLE: $1VALUES (:DYNAMIC)',
     ];
 
     /**
