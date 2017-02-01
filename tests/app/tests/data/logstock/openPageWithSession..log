@@ -8,8 +8,6 @@ Route to run: site/session
 
 Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionSession()
 
-session
-
 SELECT `data` FROM session WHERE "expire">:DYNAMIC "id"=:DYNAMIC
 
 Session started

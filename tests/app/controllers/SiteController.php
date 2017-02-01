@@ -39,7 +39,6 @@ class SiteController extends Controller
      */
     public function actionSession()
     {
-        \Yii::trace('session');
         \Yii::$app->session->open();
 
         return 'session';
