@@ -1,7 +1,7 @@
 <?php
 namespace pastuhov\logstock\tests\functional;
 
-class ExampleFunctionalFilterCest
+class ExampleFunctionalCest
 {
     public function openSiteViewRoute(\pastuhov\logstock\tests\FunctionalTester $I)
     {
