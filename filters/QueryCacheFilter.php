@@ -13,7 +13,6 @@ class QueryCacheFilter extends RegexpFilter
      */
     public $patterns = [
         '/(Saved query result in cache|Query result served from cache|Executing Redis Command: [A-Z]+)/',
-        '/\n{2,}/',
     ];
 
     /**
@@ -21,6 +20,5 @@ class QueryCacheFilter extends RegexpFilter
      */
     public $replacement = [
         '',
-        PHP_EOL,
     ];
 }
