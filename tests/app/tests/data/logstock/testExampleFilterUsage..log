@@ -1,6 +1,3 @@
 Entry: console
-
 Test session
-
 SELECT * FROM session WHERE expire < :DYNAMIC
-
