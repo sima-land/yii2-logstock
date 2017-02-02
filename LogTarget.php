@@ -182,10 +182,10 @@ class LogTarget extends Target
 
     protected function convertArrayToText($array)
     {
-        $text = 'Entry: ' . $array['summary']['entry'] . PHP_EOL . PHP_EOL;
+        $text = 'Entry: ' . $array['summary']['entry'] . PHP_EOL;
 
         foreach ($array['log']['messages'] as $key=>$message) {
-            $text .= trim($message[0]) . PHP_EOL . PHP_EOL;
+            $text .= trim($message[0]) . PHP_EOL;
         }
 
         return $text;

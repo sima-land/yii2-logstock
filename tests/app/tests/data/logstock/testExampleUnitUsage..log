@@ -1,6 +1,3 @@
 Entry: console
-
 Test info message
-
 SELECT * FROM page
-

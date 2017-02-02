@@ -1,18 +1,9 @@
 Entry: http://localhost:8080/index-test.php/?r=site/session
-
 Pretty URL not enabled. Using default URL parsing logic.
-
 Route requested: 'site/session'
-
 Route to run: site/session
-
 Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionSession()
-
 SELECT `data` FROM session WHERE "expire">:DYNAMIC "id"=:DYNAMIC
-
 Session started
-
 SELECT `id` FROM session WHERE "id"=:DYNAMIC
-
 INSERT INTO session  (`data`, `id`, `expire`) VALUES (:DYNAMIC)
-

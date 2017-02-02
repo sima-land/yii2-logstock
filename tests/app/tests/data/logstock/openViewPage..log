@@ -1,14 +1,7 @@
 Entry: http://localhost:8080/index-test.php/?r=site/view
-
 Pretty URL not enabled. Using default URL parsing logic.
-
 Route requested: 'site/view'
-
 Route to run: site/view
-
 Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionView()
-
 view
-
 SELECT * FROM page
-
