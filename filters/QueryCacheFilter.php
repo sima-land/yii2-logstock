@@ -12,7 +12,7 @@ class QueryCacheFilter extends RegexpFilter
      * @var array
      */
     public $patterns = [
-        '/(Saved query result in cache|Query result served from cache|Executing Redis Command: [A-Z]+)/',
+        '/(Saved query result in cache|Query result served from cache|Executing Redis Command: [A-Z]+)\n/',
     ];
 
     /**
