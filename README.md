@@ -98,7 +98,7 @@ Testing
 -------
 
 ```bash
-/vendor/bin/codecept run unit,acceptance
+./vendor/bin/codecept run unit,acceptance
 ```
 
 If web server needed:

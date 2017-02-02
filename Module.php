@@ -10,6 +10,7 @@ namespace pastuhov\logstock;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Application;
+use yii\helpers\ArrayHelper;
 
 /**
  * The Yii Debug Module provides the debug toolbar and debugger
@@ -75,7 +76,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public function bootstrap($app)
     {
         //Request schema to avoid unnecessary queries in log
-        \Yii::$app->db->schema->getTableSchemas();
+        $app->db->schema->getTableSchemas();
+
+        $app->getLog()->getLogger()->flush();
 
         $logTarget = $this->logTarget = \Yii::$app->getLog()->targets['logstock'] = new LogTarget($this);
 
@@ -83,7 +86,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
             if ($app instanceof \yii\web\Application) {
                 $headers = $app->getRequest()->getHeaders();
                 if ($filters = $headers->get('Logstock-filters')) {
-                    $this->filters = unserialize($headers->get('Logstock-filters'));
+                    $this->filters = ArrayHelper::merge(
+                        $this->filters,
+                        unserialize($headers->get('Logstock-filters'))
+                    );
                 }
                 if ($headers->get('Logstock') === 'true') {
                     $logTarget->enabled = true;
@@ -205,6 +211,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public function addFilter(LogFilterInterface $filter)
     {
         $this->filters[] = $filter;
+    }
+
+    public function setFilters($filters)
+    {
+        $this->filters = $filters;
     }
 
     public function clearFilters()
