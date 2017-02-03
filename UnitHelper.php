@@ -18,9 +18,19 @@ class UnitHelper extends BaseHelper
      */
     protected $module;
 
-    public function assertLog(callable $function, Application $app, $identifier='')
+    /**
+     * @param callable $function
+     * @param Application $app
+     * @param string $identifier
+     * @param array $filters
+     */
+    public function assertLog(callable $function, Application $app, $identifier='', $filters = [])
     {
         $this->module = $app->getModule('logstock');
+
+        if ($filters) {
+            $this->module->setFilters($filters);
+        }
         $this->logTarget = $this->module->getLogTarget();
 
         $this->logTarget->enabled = true;
