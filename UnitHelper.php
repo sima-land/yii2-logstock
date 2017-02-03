@@ -20,7 +20,7 @@ class UnitHelper extends BaseHelper
 
     /**
      * @param callable $function
-     * @param Application $app
+     * @param Application $appd
      * @param string $identifier
      * @param array $filters
      */
