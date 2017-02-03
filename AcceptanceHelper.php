@@ -25,6 +25,9 @@ class AcceptanceHelper extends BaseHelper
         $actor->amOnPage('logstock-agregate');
         $expected = base64_decode($actor->grabTextFrom('#expected'));
 
+        $actor->deleteHeader('Logstock-filters');
+        $actor->deleteHeader('Logstock-Get-Content');
+
         if ($expected === '') {
             $this->fail('Fixture has aggregated. Please restart test!');
         } else {
