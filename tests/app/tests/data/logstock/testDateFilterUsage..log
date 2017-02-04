@@ -1,0 +1,2 @@
+Entry: console
+SELECT * FROM page WHERE created_at < :DATE
