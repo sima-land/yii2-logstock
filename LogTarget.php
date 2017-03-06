@@ -185,7 +185,9 @@ class LogTarget extends Target
         $text = 'Entry: ' . $array['summary']['entry'] . PHP_EOL;
 
         foreach ($array['log']['messages'] as $key=>$message) {
-            $text .= trim($message[0]) . PHP_EOL;
+            if (is_string($message[0])) {
+                $text .= trim($message[0]) . PHP_EOL;
+            }
         }
 
         return $text;
