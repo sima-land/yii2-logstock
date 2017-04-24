@@ -1,7 +1,7 @@
-Testing Extension for Yii 2
+Snapshot testing extension for Yii 2
 ===========================
 
-This extension provides recording and asserting application trace. Based on yii\debug module.
+This extension provides recording and asserting application trace (snapshot). Based on yii\debug module.
 
 ![Cover](doc/images/terminal.png)
 
@@ -75,14 +75,14 @@ Use assertLog() method in tests
 ...
 ```
 
-First time trace will be recorded
+First time snapshot artifact will be recorded
 
 ```
 1) Test example unit usage (unit\ExampleUnitTest::testExampleUnitUsage)
 Fixture has aggregated. Please restart test!
 ```
 
-Recorded trace log:
+Recorded snapshot:
 ```
 Entry: console
 
@@ -90,7 +90,7 @@ Test info message
 
 SELECT * FROM page
 ```
-in subsequent test runs log will be compared
+On subsequent test runs Logstock will simply compare the rendered output with the previous snapshot. If they match, the test will pass. If they don't match, either the test runner found a bug in your code that should be fixed, or the implementation has changed and the snapshot needs to be updated.
 
 For more info see tests.
 
