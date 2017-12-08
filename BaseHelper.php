@@ -3,6 +3,12 @@ namespace pastuhov\logstock;
 
 class BaseHelper extends \Codeception\Module
 {
+    /**
+     * @inheritdoc
+     */
+    public $config = [
+        'logstock-rewrite' => false, // whether to enable recreation logstock fixtures
+    ];
 
     /**
      * Event hook before a test starts

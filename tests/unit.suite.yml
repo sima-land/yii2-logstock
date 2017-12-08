@@ -13,3 +13,10 @@ modules:
 #        Yii2:
 #            configFile: 'tests/app/config/console.php'
 #            class: '\yii\console\Application'
+env:
+    # Enable rewriting mode
+    rewrite:
+        modules:
+            config:
+                pastuhov\logstock\UnitHelper:
+                    logstock-rewrite: true
