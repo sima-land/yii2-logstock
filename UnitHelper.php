@@ -31,6 +31,8 @@ class UnitHelper extends BaseHelper
         if ($filters) {
             $this->module->setFilters($filters);
         }
+        $this->module->rewrite = $this->config['logstock-rewrite'];
+
         $this->logTarget = $this->module->getLogTarget();
 
         $this->logTarget->enabled = true;

@@ -16,6 +16,9 @@ class AcceptanceHelper extends BaseHelper
         if ($filters) {
             $actor->setHeader('Logstock-filters', serialize($filters));
         }
+        if ($this->config['logstock-rewrite']) {
+            $actor->setHeader('Logstock-rewrite', 'true');
+        }
         call_user_func($function);
 
         $actor->deleteHeader('Logstock');
@@ -27,6 +30,7 @@ class AcceptanceHelper extends BaseHelper
 
         $actor->deleteHeader('Logstock-filters');
         $actor->deleteHeader('Logstock-Get-Content');
+        $actor->deleteHeader('Logstock-rewrite');
 
         if ($expected === '') {
             $this->fail('Fixture has aggregated. Please restart test!');

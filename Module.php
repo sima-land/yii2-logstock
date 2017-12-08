@@ -54,6 +54,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public $enableDebugLogs = false;
 
     /**
+     * @var bool whether to enable recreating logstock fixture files.
+     */
+    public $rewrite = false;
+
+    /**
      * @var LogFilterInterface[] filters for content which stored in fixture
      */
     protected $filters = [];
@@ -91,6 +96,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                         unserialize($headers->get('Logstock-filters'))
                     );
                 }
+                $this->rewrite = (bool) $headers->get('Logstock-rewrite');
                 if ($headers->get('Logstock') === 'true') {
                     $logTarget->enabled = true;
                 } elseif ($headers->get('Logstock-Get-Content') !== null) {
@@ -194,7 +200,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         $fixtureFilePath = $this->fixturePath . '/' . $fixtureFileName;
         $actualContent = $this->acceptFilters($this->getActualContent());
-        if (file_exists($fixtureFilePath)) {
+        if (file_exists($fixtureFilePath) && !$this->rewrite) {
             $value = [
                 file_get_contents($fixtureFilePath),
                 $actualContent
