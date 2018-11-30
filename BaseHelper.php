@@ -7,7 +7,7 @@ class BaseHelper extends \Codeception\Module
      * @inheritdoc
      */
     public $config = [
-        'logstock-rewrite' => false, // whether to enable recreation logstock fixtures
+        'logstock-rewrite' => false, // whether to enable recreation logstock snapshots
         'logstock-build' => false, // whether to disable fail on create logstock snapshots
     ];
 
@@ -22,10 +22,10 @@ class BaseHelper extends \Codeception\Module
         $this->test = $test;
     }
 
-    protected function performFail()
+    protected function performFail($failMessage)
     {
         if(!$this->config['logstock-build']) {
-            $this->fail('Fixture has aggregated. Please restart test!');
+            $this->fail($failMessage);
         }
     }
 

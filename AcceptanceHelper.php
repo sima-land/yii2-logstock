@@ -33,7 +33,7 @@ class AcceptanceHelper extends BaseHelper
         $actor->deleteHeader('Logstock-rewrite');
 
         if ($expected === '') {
-            $this->performFail();
+            $this->performFail('Fixture has aggregated. Please restart test!');
         } else {
             $actual = base64_decode($actor->grabTextFrom('#actual'));
 
