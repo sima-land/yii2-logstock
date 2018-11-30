@@ -48,7 +48,7 @@ class UnitHelper extends BaseHelper
 
         $content = $this->module->getContent($fixtureFileName);
         if ($content === false) {
-            $this->logstockCreateFail();
+            $this->performFail();
         } else {
             $this->assertSame(
                 $content[0], // Expected
