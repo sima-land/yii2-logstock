@@ -33,7 +33,7 @@ class AcceptanceHelper extends BaseHelper
         $actor->deleteHeader('Logstock-rewrite');
 
         if ($expected === '') {
-            $this->logstockCreateFail();
+            $this->performFail();
         } else {
             $actual = base64_decode($actor->grabTextFrom('#actual'));
 
