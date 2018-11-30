@@ -24,7 +24,7 @@ class BaseHelper extends \Codeception\Module
 
     protected function logstockCreateFail()
     {
-        if(!$this->config['logstock-refresh']) {
+        if(!$this->config['logstock-build']) {
             $this->fail('Fixture has aggregated. Please restart test!');
         }
     }
