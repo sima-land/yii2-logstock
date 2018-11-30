@@ -8,7 +8,7 @@ class BaseHelper extends \Codeception\Module
      */
     public $config = [
         'logstock-rewrite' => false, // whether to enable recreation logstock fixtures
-        'logstock-build' => false, // whether to disable fail on create logstock fixtures
+        'logstock-build' => false, // whether to disable fail on create logstock snapshots
     ];
 
     /**
