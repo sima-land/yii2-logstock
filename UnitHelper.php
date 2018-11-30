@@ -48,7 +48,7 @@ class UnitHelper extends BaseHelper
 
         $content = $this->module->getContent($fixtureFileName);
         if ($content === false) {
-            $this->fail('Fixture has aggregated. Please restart test!');
+            $this->performFail('Fixture has aggregated. Please restart test!');
         } else {
             $this->assertSame(
                 $content[0], // Expected

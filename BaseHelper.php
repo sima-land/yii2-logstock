@@ -8,6 +8,7 @@ class BaseHelper extends \Codeception\Module
      */
     public $config = [
         'logstock-rewrite' => false, // whether to enable recreation logstock snapshots
+        'logstock-build' => false, // whether to disable fail on create logstock snapshots
     ];
 
     /**
@@ -19,6 +20,13 @@ class BaseHelper extends \Codeception\Module
     public function _before(\Codeception\TestCase $test)
     {
         $this->test = $test;
+    }
+
+    protected function performFail($failMessage)
+    {
+        if(!$this->config['logstock-build']) {
+            $this->fail($failMessage);
+        }
     }
 
     protected function getFileName($identifier='')
