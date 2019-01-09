@@ -1,6 +1,7 @@
 <?php
 namespace pastuhov\logstock;
 
+use common\Yii;
 use yii\base\Application;
 
 class UnitHelper extends BaseHelper
@@ -33,11 +34,10 @@ class UnitHelper extends BaseHelper
         }
         $this->module->rewrite = $this->config['logstock-rewrite'];
 
+        $app->getLog()->getLogger()->flush();
+        $app->getLog()->setFlushInterval(1);
         $this->logTarget = $this->module->getLogTarget();
-
         $this->logTarget->enabled = true;
-        $app->log->logger->flush();
-        $app->log->setFlushInterval(1);
 
         call_user_func($function);
 
