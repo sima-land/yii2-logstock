@@ -183,7 +183,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
         }
 
         if ($content !== '') {
-            $manifest = array_reverse(unserialize($content), true);
+            $manifest = unserialize($content);
         } else {
             $manifest = [];
         }

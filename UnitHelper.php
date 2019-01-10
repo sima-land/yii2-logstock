@@ -35,9 +35,9 @@ class UnitHelper extends BaseHelper
 
         $this->logTarget = $this->module->getLogTarget();
 
-        $this->logTarget->enabled = true;
         $app->log->logger->flush();
         $app->log->setFlushInterval(1);
+        $this->logTarget->enabled = true;
 
         call_user_func($function);
 
