@@ -14,11 +14,11 @@ $config = [
             'charset' => 'utf8',
         ],
         'log' => [
-            'flushInterval' => 1,
+            'flushInterval' => 100,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning', 'trace'],
+                    'levels' => ['error', 'warning', 'info', 'trace'],
                     'exportInterval' => 1,
                 ],
             ],

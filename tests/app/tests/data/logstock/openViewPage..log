@@ -1,4 +1,18 @@
-Entry: http://localhost:8080/index-test.php/?r=site/view
+Entry: http://localhost:8080/index-test.php/?r=site/view&request=1
+Pretty URL not enabled. Using default URL parsing logic.
+Route requested: 'site/view'
+Route to run: site/view
+Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionView()
+view
+SELECT * FROM page
+Entry: http://localhost:8080/index-test.php/?r=site/view&request=2
+Pretty URL not enabled. Using default URL parsing logic.
+Route requested: 'site/view'
+Route to run: site/view
+Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionView()
+view
+SELECT * FROM page
+Entry: http://localhost:8080/index-test.php/?r=site/view&request=3
 Pretty URL not enabled. Using default URL parsing logic.
 Route requested: 'site/view'
 Route to run: site/view
