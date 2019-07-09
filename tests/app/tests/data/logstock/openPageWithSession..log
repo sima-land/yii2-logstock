@@ -5,5 +5,7 @@ Route to run: site/session
 Running action: pastuhov\logstock\tests\app\controllers\SiteController::actionSession()
 SELECT `data` FROM session WHERE "expire">:DYNAMIC "id"=:DYNAMIC
 Session started
-SELECT `id` FROM session WHERE "id"=:DYNAMIC
-INSERT INTO session  (`data`, `id`, `expire`) VALUES (:DYNAMIC)
+PRAGMA INDEX_LIST ('session')
+PRAGMA INDEX_INFO ('sqlite_autoindex_session_1')
+WITH "EXCLUDED" (`data`, `id`, `expire`) AS (VALUES (:SESSIONDATA, :DYNAMIC, :TIMESTAMP)) UPDATE `session` SET `data`=(SELECT `data` FROM `EXCLUDED`), `expire`=(SELECT `expire` FROM `EXCLUDED`) WHERE `session`.`id`=(SELECT `id` FROM `EXCLUDED`);
+INSERT OR IGNORE INTO session  (`data`, `id`, `expire`) VALUES (:DYNAMIC);

@@ -44,6 +44,6 @@
         }
     },
     "scripts": {
-        "test": "cd./vendor/bin/codecept run"
+        "test": "./vendor/bin/codecept run"
     }
 }
