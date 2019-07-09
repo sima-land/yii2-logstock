@@ -11,6 +11,7 @@ class WhereInSortingFilterTest extends UnitTestCase
     {
         $this->tester->assertLog(function (){
             Yii::$app->getDb()->createCommand('SELECT * FROM page WHERE id IN (5, 2, 6, 1)')->execute();
+            Yii::$app->getDb()->createCommand('SELECT * FROM page WHERE id IN (SELECT id FROM page WHERE id IN (5, 2, 6, 1))')->execute();
         }, Yii::$app, '', [new WhereInSortingFilter()]);
     }
 }

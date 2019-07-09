@@ -8,6 +8,12 @@
         "issues": "https://github.com/pastuhov/yii2-logstock/issues",
         "source": "https://github.com/pastuhov/yii2-logstock"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "authors": [
         {
             "name": "Pastukhov Kirill",
@@ -18,7 +24,7 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0.4"
+        "yiisoft/yii2": "~2.0.15"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.6",

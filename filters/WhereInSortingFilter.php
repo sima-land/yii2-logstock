@@ -15,7 +15,7 @@ class WhereInSortingFilter implements LogFilterInterface
      */
     public function filter($log)
     {
-        return preg_replace_callback('/\s+IN\s+\(([^\)]+)\)/', function ($matches) {
+        return preg_replace_callback('/\s+IN\s+\(([^\)IN]+)\)/', function ($matches) {
             $values = array_map('trim', explode(',', $matches[1]));
             sort($values);
             return str_replace($matches[1], implode(', ', $values), $matches[0]);
